@@ -1,6 +1,6 @@
 from urllib.parse import urlparse
 from fastapi import FastAPI, HTTPException
-from server.schemas import AnalyzeRequest
+from server.schemas import AnalyzeRequest, AnalyzeResponse
 from server.services import crawl_article, extract_keywords
 
 app = FastAPI()
@@ -11,7 +11,7 @@ async def health_check():
     return {"health": "ok"}
 
 
-@app.post("/analyze")
+@app.post("/analyze", response_model=AnalyzeResponse)
 async def analyze(request: AnalyzeRequest):
     if urlparse(request.url).scheme not in ("https", "http"):
         raise HTTPException(status_code=400, detail="Invalid URL")
@@ -20,8 +20,8 @@ async def analyze(request: AnalyzeRequest):
     if article is None:
         raise HTTPException(
             status_code=422,
-            detail="Could not extract article content from URL; page could not be processed.",
+            detail="Could not extract article content from URL.",
         )
-    keywords = await extract_keywords(article)
 
-    return {"keywords": keywords}
+    keywords = await extract_keywords(article)
+    return AnalyzeResponse(keywords=keywords)
