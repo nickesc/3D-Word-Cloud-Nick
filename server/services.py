@@ -14,5 +14,9 @@ async def crawl_article(url: str) -> str | None:
 
 async def extract_keywords(text: str) -> list[str]:
     rake = Rake()
+    if not text.strip():
+        return []
     rake.extract_keywords_from_text(text)
-    return rake.get_ranked_phrases_with_scores()
+    ranked_phrases = rake.get_ranked_phrases_with_scores()
+    return ranked_phrases
+
