@@ -1,3 +1,4 @@
+from urllib.parse import urlparse
 from fastapi import FastAPI, HTTPException
 from server.schemas import AnalyzeRequest
 from server.services import crawl_article
@@ -12,7 +13,7 @@ async def health_check():
 
 @app.post("/analyze")
 async def analyze(request: AnalyzeRequest):
-    if not request.url.startswith("https://" or "http://"):
+    if urlparse(request.url).scheme not in ("https", "http"):
         raise HTTPException(status_code=400, detail="Invalid URL")
 
     article = await crawl_article(request.url)
