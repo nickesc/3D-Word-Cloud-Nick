@@ -10,3 +10,8 @@ class AnalyzeResponse(BaseModel):
         ..., description="The keywords extracted from the article"
     )
 
+
+class ArticleExamplesResponse(BaseModel):
+    articles: list[str] = Field(
+        ..., description="A list of article URLs to use as examples"
+    )

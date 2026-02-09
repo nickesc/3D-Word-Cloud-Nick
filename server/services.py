@@ -20,3 +20,11 @@ async def extract_keywords(text: str) -> list[str]:
     ranked_phrases = rake.get_ranked_phrases_with_scores()
     return ranked_phrases
 
+
+async def get_article_examples() -> list[str]:
+    return [
+        "https://www.nbcnews.com/health/aging/brain-training-game-protect-dementia-research-decades-alzheimers-rcna257790",
+        "https://www.npr.org/2026/01/23/nx-s1-5678936/oscar-nominated-movies-how-to-watch",
+        "https://www.propublica.org/article/faa-safety-warning-spacex-starship-explosions-airlines",
+        "https://apnews.com/article/womens-downhill-olympics-breezy-johnson-vonn-cdbc3193ae07b13a3b6f9ca37bae3482",
+    ]

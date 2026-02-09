@@ -1,7 +1,7 @@
 from urllib.parse import urlparse
 from fastapi import FastAPI, HTTPException
-from server.schemas import AnalyzeRequest, AnalyzeResponse
-from server.services import crawl_article, extract_keywords
+from server.schemas import AnalyzeRequest, AnalyzeResponse, ArticleExamplesResponse
+from server.services import crawl_article, extract_keywords, get_article_examples
 
 app = FastAPI()
 
@@ -25,3 +25,8 @@ async def analyze(request: AnalyzeRequest):
 
     keywords = await extract_keywords(article)
     return AnalyzeResponse(keywords=keywords)
+
+
+@app.get("/articles", response_model=ArticleExamplesResponse)
+async def get_examples():
+    return ArticleExamplesResponse(articles=await get_article_examples())
