@@ -21,7 +21,11 @@ function Wordcloud({keywords}: {keywords: Keyword[]}) {
     return (
         <group ref={groupRef}>
             {keywords.map((k, i) => (
-                <Word keyword={k} position={[points[i * 3], points[i * 3 + 1], points[i * 3 + 2]]} />
+                <Word
+                    key={`${k.keyword}-${k.score}`}
+                    keyword={k}
+                    position={[points[i * 3], points[i * 3 + 1], points[i * 3 + 2]]}
+                />
             ))}
         </group>
     );
@@ -29,7 +33,7 @@ function Wordcloud({keywords}: {keywords: Keyword[]}) {
 
 function Word({keyword, position}: {keyword: Keyword; position: [number, number, number]}) {
     return (
-        <Billboard key={`${keyword.keyword}-${keyword.score}`}>
+        <Billboard>
             <Text position={position}>{keyword.keyword}</Text>
         </Billboard>
     );
