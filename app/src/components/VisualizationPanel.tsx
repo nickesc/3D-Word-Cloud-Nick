@@ -1,7 +1,6 @@
 import type {Keyword} from "../types";
 import * as THREE from "three";
 import {Canvas} from "@react-three/fiber";
-//import type {ThreeElements} from "@react-three/fiber";
 import {Text, Billboard} from "@react-three/drei";
 import {useRef, useMemo} from "react";
 
@@ -9,11 +8,13 @@ function Wordcloud({keywords}: {keywords: Keyword[]}) {
     const groupRef = useRef<THREE.Group>(null);
 
     const points = useMemo(() => {
-        const p = new Float32Array(keywords.length);
+        const p = new Float32Array(keywords.length * 3);
         for (let i = 0; i < keywords.length; i++) {
-            p[i * 3] = (Math.random() - 0.5) * 10; // X
-            p[i * 3 + 1] = (Math.random() - 0.5) * 10; // Y
-            p[i * 3 + 2] = (Math.random() - 0.5) * 10; // Z
+            const t = i * 2.399963229728653;
+            const radius = 1.2 + i * 0.06;
+            p[i * 3] = Math.cos(t) * radius; // X
+            p[i * 3 + 1] = (i - keywords.length / 2) * 0.08; // Y
+            p[i * 3 + 2] = Math.sin(t) * radius; // Z
         }
         return p;
     }, [keywords]);
