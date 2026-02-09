@@ -1,8 +1,9 @@
 import "./App.css";
-import {useState, useCallback} from "react";
+import {useState, useCallback, useEffect} from "react";
 import Header from "./components/Header";
 import UrlInput from "./components/UrlInput";
 import VisualizationPanel from "./components/VisualizationPanel";
+import ArticleSelector from "./components/ArticleSelector";
 import type {Keyword} from "./types";
 
 const API_BASE = "http://localhost:8127";
@@ -10,6 +11,20 @@ const API_BASE = "http://localhost:8127";
 function App() {
     const [url, setUrl] = useState("");
     const [keywords, setKeywords] = useState<Keyword[]>([]);
+    const [articles, setArticles] = useState<string[]>([]);
+
+    useEffect(() => {
+        const fetchArticles = async () => {
+            const res = await fetch(`${API_BASE}/articles`);
+            if (!res.ok) {
+                console.error(`GET /articles failed (${res.status})`);
+                return;
+            }
+            const data = await res.json();
+            setArticles(data.articles);
+        };
+        fetchArticles();
+    }, []);
 
     const onAnalyze = useCallback(async (nextUrl: string) => {
         try {
@@ -46,6 +61,7 @@ function App() {
             <main>
                 <VisualizationPanel keywords={keywords} />
                 <UrlInput onAnalyze={onAnalyze} />
+                <ArticleSelector articles={articles} />
             </main>
         </>
     );
