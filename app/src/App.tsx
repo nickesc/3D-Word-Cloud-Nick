@@ -44,7 +44,7 @@ function App() {
         <>
             <Header />
             <main>
-                <VisualizationPanel />
+                <VisualizationPanel keywords={keywords} url={url} />
                 <UrlInput onAnalyze={onAnalyze} />
             </main>
         </>
