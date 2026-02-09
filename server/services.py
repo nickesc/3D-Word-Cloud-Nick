@@ -1,8 +1,5 @@
-from bs4 import BeautifulSoup
-import requests
+from trafilatura import fetch_url, extract
 
 
 async def crawl_article(url: str) -> str:
-    response = requests.get(url)
-    soup = BeautifulSoup(response.text, "html.parser")
-    return soup.get_text()
+    return extract(fetch_url(url))
