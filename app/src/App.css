@@ -72,9 +72,12 @@ button, input[type="text"], .linkButton, select {
     border-radius: calc(var(--corners) / 2);
     border: 1px solid transparent;
     font-family: inherit;
-    cursor: pointer;
     transition: background-color 0.2s, color 0.2s, outline-color 0.3s;
     box-shadow: var(--shadow-elevation-low);
+}
+
+button, .linkButton, select {
+    cursor: pointer;
 }
 
 input[type="text"], select {
