@@ -2,8 +2,93 @@ header {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    right: 0;
     z-index: 1;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: var(--panel-background-color);
+    color: var(--panel-text-color);
     padding: 1em;
+    margin: 1em;
+    border-radius: var(--corners);
+    box-shadow: var(--panel-shadow-elevation-medium);
+}
+
+#date-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--contianer-background-color);
+    color: var(--contianer-text-color);
+    padding: 0.3em 0.7em;
+    border-radius: calc(var(--corners) / 1.6);
+    box-shadow: var(--shadow-elevation-low);
+}
+
+#header-content {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#header-content-right, #header-content-right a {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#header-content-right {
+    gap: .7em;
+}
+
+#header-content-right a, #date-container {
+    gap: 0.5em;
+}
+
+#header-content-right img {
+    height: 1.5em;
+    width: auto;
+    border-radius: 2px;
+}
+
+#header-title {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-bottom: 0.7em;
+}
+
+
+@media (max-width: 500px) {
+    #header-content-right {
+        font-size: 0.8em;
+    }
+
+    #header h1 {
+        font-size: 1.5em;
+    }
+}
+
+@media (max-width: 400px) {
+    #header-content-right {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5em;
+    }
+
+    #header-content-right .linkButton {
+        align-self: stretch;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+    }
+
+    #header h1 {
+        font-size: 1.3em;
+    }
 }

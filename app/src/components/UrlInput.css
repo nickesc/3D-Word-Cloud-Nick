@@ -2,16 +2,31 @@
     position: absolute;
     bottom: 0;
     left: 0;
-    width: 100%;
-    height: 4em;
+    width: calc(100% - 2em);
     z-index: 1;
-    background-color: rgba(0, 0, 0, 0.9);
+    background-color: var(--panel-background-color);
+    color: var(--panel-text-color);
+    margin: 1em;
     padding: 1em;
+    border-radius: var(--corners);
+    box-shadow: var(--panel-shadow-elevation-medium);
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
     gap: 1em;
+}
+
+#url-input-form button {
+    align-self: stretch;
+    max-width: 200px;
+}
+
+#url-input-form-left {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    flex: 4;
 }
 
 #url-input-form input {
@@ -24,5 +39,6 @@
 
 #url-input-form select {
     flex: 2;
+    width: 100%;
 }
 
