@@ -3,6 +3,7 @@ import {useState, useCallback, useEffect} from "react";
 import Header from "./components/Header";
 import UrlInput from "./components/UrlInput";
 import VisualizationPanel from "./components/VisualizationPanel";
+import StatusIndicator from "./components/StatusIndicator";
 import type {Keyword} from "./types";
 
 const API_BASE = "http://localhost:8127";
@@ -11,6 +12,7 @@ function App() {
     const [url, setUrl] = useState("");
     const [keywords, setKeywords] = useState<Keyword[]>([]);
     const [articles, setArticles] = useState<string[]>([]);
+    const [status, setStatus] = useState<"idle" | "loading" | "success" | "error">("idle");
 
     useEffect(() => {
         const fetchArticles = async () => {
@@ -26,6 +28,7 @@ function App() {
     }, []);
 
     const onAnalyze = useCallback(async (nextUrl: string) => {
+        setStatus("loading");
         try {
             const res = await fetch(`${API_BASE}/analyze`, {
                 method: "POST",
@@ -48,9 +51,11 @@ function App() {
             setUrl(nextUrl);
             setKeywords(data.keywords ?? []);
             console.log(keywords);
+            setStatus("success");
         } catch (err) {
             setKeywords([]);
             console.error(err);
+            setStatus("error");
         }
     }, []);
 
@@ -59,6 +64,7 @@ function App() {
             <Header />
             <main>
                 <VisualizationPanel keywords={keywords} />
+                <StatusIndicator status={status} />
                 <UrlInput onAnalyze={onAnalyze} articles={articles} />
             </main>
         </>

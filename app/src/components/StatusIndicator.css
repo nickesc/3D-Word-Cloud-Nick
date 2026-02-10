@@ -1,0 +1,22 @@
+.status-indicator {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    pointer-events: none;
+    font-size: 3em;
+    font-weight: 700;
+}
+
+.status-indicator.loading {
+    color: rgb(165, 155, 155);
+}
+
+.status-indicator.error {
+    color: rgb(136, 45, 45);
+}
