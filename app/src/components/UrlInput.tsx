@@ -24,6 +24,8 @@ function UrlInput({onAnalyze, articles}: {onAnalyze: (url: string) => Promise<vo
         <form id="url-input-form" onSubmit={handleSubmit}>
             <div id="url-input-form-left">
                 <input
+                    id="url-input-form-input"
+                    name="url-input-form-input"
                     type="text" //
                     placeholder="Enter article URL"
                     value={url}
@@ -31,6 +33,8 @@ function UrlInput({onAnalyze, articles}: {onAnalyze: (url: string) => Promise<vo
                     disabled={!!selectedArticle}
                 />
                 <select
+                    id="url-input-form-select"
+                    name="url-input-form-select"
                     value={selectedArticle} //
                     onChange={(e) => handleSelect(e.target.value)}
                 >
