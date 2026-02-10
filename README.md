@@ -36,7 +36,9 @@ Python packages used:
 Frontend packages used:
 
 - `react`
-- `react-three-fiber`
+- `three`
+- `@react-three/fiber`
+- `@react-three/drei`
 
 ## Running the project
 
