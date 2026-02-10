@@ -22,25 +22,27 @@ function UrlInput({onAnalyze, articles}: {onAnalyze: (url: string) => Promise<vo
 
     return (
         <form id="url-input-form" onSubmit={handleSubmit}>
-            <input
-                type="text" //
-                placeholder="Enter article URL"
-                value={url}
-                onChange={handleInputChange}
-                disabled={!!selectedArticle}
-            />
+            <div id="url-input-form-left">
+                <input
+                    type="text" //
+                    placeholder="Enter article URL"
+                    value={url}
+                    onChange={handleInputChange}
+                    disabled={!!selectedArticle}
+                />
+                <select
+                    value={selectedArticle} //
+                    onChange={(e) => handleSelect(e.target.value)}
+                >
+                    <option value="">Custom URL</option>
+                    {articles.map((article) => (
+                        <option key={article} value={article}>
+                            {article}
+                        </option>
+                    ))}
+                </select>
+            </div>
             <button type="submit">Analyze</button>
-            <select
-                value={selectedArticle} //
-                onChange={(e) => handleSelect(e.target.value)}
-            >
-                <option value="">Other</option>
-                {articles.map((article) => (
-                    <option key={article} value={article}>
-                        {article}
-                    </option>
-                ))}
-            </select>
         </form>
     );
 }
