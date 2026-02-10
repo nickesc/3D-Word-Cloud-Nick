@@ -8,8 +8,8 @@ function Header() {
             </div>
             <div id="header-content">
                 <span>
-                    by{" "}
-                    <a href="https://github.com/nickesc" target="_blank">
+                    by&nbsp;
+                    <a id="header-author-link" href="https://github.com/nickesc" target="_blank">
                         Nick Escobar
                     </a>
                 </span>
